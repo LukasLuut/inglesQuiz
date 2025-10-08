@@ -14,7 +14,29 @@ export default function App() {
   const [questionVisible, setQuestionVisible] = useState(false); // Mostra/oculta o quadro da pergunta
   const [showResultButtons, setShowResultButtons] = useState(false); // Mostra botões de resultado
   const [hoveredPlayer, setHoveredPlayer] = useState(null); // Jogador com hover ativo
-
+  const [currentQuestion, setCurrentQuestion] = useState("");
+  const [questions, setQuestions] = useState([
+    "Qual é o maior planeta do Sistema Solar?",
+    "Quem pintou a Mona Lisa?",
+    "Em que ano o homem pisou na Lua pela primeira vez?",
+    "Qual é o país com a maior população do mundo?",
+    "Quem escreveu o livro 'Dom Quixote'?",
+    "Qual é o elemento químico representado pela letra O?",
+    "Qual é o idioma mais falado no mundo?",
+    "Em que continente fica o Egito?",
+    "Quem foi o primeiro presidente do Brasil?",
+    "Qual é o rio mais extenso do mundo?",
+    "Quantos ossos tem o corpo humano adulto, aproximadamente?",
+    "Em que país se originou o futebol?",
+    "Qual é a capital da Austrália?",
+    "Quem descobriu o Brasil?",
+    "Qual é o metal líquido à temperatura ambiente?",
+    "Em que ano começou a Segunda Guerra Mundial?",
+    "Qual é o animal terrestre mais rápido do mundo?",
+    "Qual é o nome do processo em que as plantas produzem seu próprio alimento?",
+    "Quantos planetas fazem parte do Sistema Solar?",
+    "Quem foi Albert Einstein?"
+  ]);
   const hoverTimeoutRef = useRef(null); // Referência para controlar o tempo de hover
 
   /* ================================
@@ -40,6 +62,17 @@ export default function App() {
       );
     }
   };
+
+  const getQuestion = () => {
+    const randomNumber = Math.floor(Math.random() * questions.length)
+    const question = questions[randomNumber];
+
+    const saveQuestions = questions;
+    saveQuestions.splice(randomNumber, 1);
+    setQuestions(saveQuestions)
+    
+    return question;
+  }
 
   /* ================================
    🎲 LÓGICA DE SORTEIO DE JOGADOR
@@ -67,6 +100,10 @@ export default function App() {
     setSelectedPlayer(null);
     setShowResultButtons(false);
     setQuestionVisible(true);
+    const question = getQuestion();
+    setTimeout(() => {
+      setCurrentQuestion(question);
+    }, 3000)
     randomHover();
   };
 
@@ -280,14 +317,16 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ type: "spring", stiffness: 180, damping: 15 }}
+            transition={{ type: "spring", stiffness: 40, damping: 15 }}
             className="mt-10 bg-purple-950/60 border-4 border-yellow-400 rounded-2xl shadow-lg shadow-yellow-400/30 p-6 text-center max-w-lg"
           >
             <h2 className="text-2xl font-bold mb-2 text-yellow-300">
               Pergunta:
             </h2>
             <p className="text-lg text-white/90">
-              Qual é a capital da França?
+              {
+                currentQuestion
+              }
             </p>
           </motion.div>
         )}
