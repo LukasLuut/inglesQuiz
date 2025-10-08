@@ -149,7 +149,7 @@ export default function App() {
       {/* ================================
        👥 LISTA DE JOGADORES
       ================================= */}
-      <div className="max-w-[600px] flex flex-wrap gap-6 justify-center mb-8 mt-8">
+      <div className="max-w-[800px] flex flex-wrap gap-6 justify-center mb-8 mt-8">
         <AnimatePresence>
           {players.map((player) => {
             const isHighlighted = highlighted === player.name;
@@ -196,7 +196,7 @@ export default function App() {
                     scale: { type: "spring", stiffness: 200, damping: 16 },
                     backgroundColor: { duration: 0.2 },
                   }}
-                  className="w-40 h-25 flex mb-2 pb-5 items-center justify-center rounded-xl text-center cursor-pointer select-none shadow-md transition border border-purple-600 hover:border-yellow-400"
+                  className="w-40 h-30 flex mb-2 pb-10 items-center justify-center rounded-xl text-center cursor-pointer select-none shadow-md transition border border-purple-600 hover:border-yellow-400"
                 >
                   {/* CONTEÚDO INTERNO DO CARD */}
                   <AnimatePresence mode="wait">
@@ -208,7 +208,7 @@ export default function App() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
                         transition={{ duration: 0.3 }}
-                        className="flex gap-4 mb-0 mt-4"
+                        className="flex gap-4 mb-0 mt-10"
                       >
                         <motion.button
                           whileHover={{ scale: 1.2 }}
@@ -238,9 +238,9 @@ export default function App() {
                           alt={player.name}
                           className="w-20 h-20  "
                         />
-                        <span className="text-lg font-semibold mt-2 mb-2">{player.name}</span>
+                        <span className="text-lg font-semibold mt-2 mb-0">{player.name}</span>
                         {player.score > 0 && (
-                          <span className="text-sm text-yellow-300">{player.score} pts</span>
+                          <span className="text-sm text-purple-450 mb-2">{player.score} pts</span>
                         )}
                       </motion.div>
 
