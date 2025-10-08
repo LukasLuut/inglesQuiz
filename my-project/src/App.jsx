@@ -130,6 +130,9 @@ export default function App() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onKeyDown={(e) => {
+      if (e.key === "Enter") addPlayer(); // ✅ Pressionar Enter adiciona jogador
+    }}
           className="w-64 p-2 rounded-md border-2 border-purple-500 bg-purple-950 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
           placeholder="Nome do jogador"
         />
@@ -193,7 +196,7 @@ export default function App() {
                     scale: { type: "spring", stiffness: 200, damping: 16 },
                     backgroundColor: { duration: 0.2 },
                   }}
-                  className="w-40 h-20 flex items-center justify-center rounded-xl text-center cursor-pointer select-none shadow-md transition border border-purple-600 hover:border-yellow-400"
+                  className="w-40 h-30 flex items-center justify-center rounded-xl text-center cursor-pointer select-none shadow-md transition border border-purple-600 hover:border-yellow-400"
                 >
                   {/* CONTEÚDO INTERNO DO CARD */}
                   <AnimatePresence mode="wait">
@@ -223,22 +226,24 @@ export default function App() {
                         </motion.button>
                       </motion.div>
                     ) : (
-                      // NOME NORMAL
+                      // Avatar + Nome
                       <motion.div
-                        key="name"
+                        key="avatar"
+                        className="flex flex-col items-center justify-center"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="flex flex-col items-center"
                       >
-                        <span className="font-medium">{player.name}</span>
+                        <img
+                          src={`https://robohash.org/${encodeURIComponent(player.name)}.png`}
+                          alt={player.name}
+                          className="w-20 h-20  "
+                        />
+                        <span className="text-lg font-semibold mt-2 mb-2">{player.name}</span>
                         {player.score > 0 && (
-                          <span className="text-sm text-purple-450">
-                            ({player.score} pts)
-                          </span>
+                          <span className="text-sm text-yellow-300">{player.score} pts</span>
                         )}
                       </motion.div>
+
                     )}
                   </AnimatePresence>
                 </motion.div>
