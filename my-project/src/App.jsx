@@ -149,7 +149,7 @@ export default function App() {
       {/* ================================
        👥 LISTA DE JOGADORES
       ================================= */}
-      <div className="max-w-[600px] flex flex-wrap gap-6 justify-center mb-8">
+      <div className="max-w-[600px] flex flex-wrap gap-6 justify-center mb-8 mt-8">
         <AnimatePresence>
           {players.map((player) => {
             const isHighlighted = highlighted === player.name;
@@ -196,7 +196,7 @@ export default function App() {
                     scale: { type: "spring", stiffness: 200, damping: 16 },
                     backgroundColor: { duration: 0.2 },
                   }}
-                  className="w-40 h-30 flex items-center justify-center rounded-xl text-center cursor-pointer select-none shadow-md transition border border-purple-600 hover:border-yellow-400"
+                  className="w-40 h-25 flex mb-2 pb-5 items-center justify-center rounded-xl text-center cursor-pointer select-none shadow-md transition border border-purple-600 hover:border-yellow-400"
                 >
                   {/* CONTEÚDO INTERNO DO CARD */}
                   <AnimatePresence mode="wait">
@@ -208,7 +208,7 @@ export default function App() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
                         transition={{ duration: 0.3 }}
-                        className="flex gap-4"
+                        className="flex gap-4 mb-0 mt-4"
                       >
                         <motion.button
                           whileHover={{ scale: 1.2 }}
@@ -234,7 +234,7 @@ export default function App() {
                         animate={{ opacity: 1 }}
                       >
                         <img
-                          src={`https://robohash.org/${encodeURIComponent(player.name)}.png`}
+                          src={`https://robohash.org/${encodeURIComponent(player.name)}?set=set4 `}
                           alt={player.name}
                           className="w-20 h-20  "
                         />
