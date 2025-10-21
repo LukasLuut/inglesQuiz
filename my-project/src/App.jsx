@@ -16,27 +16,26 @@ export default function App() {
   const [hoveredPlayer, setHoveredPlayer] = useState(null); // Jogador com hover ativo
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [questions, setQuestions] = useState([
-    "Qual é o maior planeta do Sistema Solar?",
-    "Quem pintou a Mona Lisa?",
-    "Em que ano o homem pisou na Lua pela primeira vez?",
-    "Qual é o país com a maior população do mundo?",
-    "Quem escreveu o livro 'Dom Quixote'?",
-    "Qual é o elemento químico representado pela letra O?",
-    "Qual é o idioma mais falado no mundo?",
-    "Em que continente fica o Egito?",
-    "Quem foi o primeiro presidente do Brasil?",
-    "Qual é o rio mais extenso do mundo?",
-    "Quantos ossos tem o corpo humano adulto, aproximadamente?",
-    "Em que país se originou o futebol?",
-    "Qual é a capital da Austrália?",
-    "Quem descobriu o Brasil?",
-    "Qual é o metal líquido à temperatura ambiente?",
-    "Em que ano começou a Segunda Guerra Mundial?",
-    "Qual é o animal terrestre mais rápido do mundo?",
-    "Qual é o nome do processo em que as plantas produzem seu próprio alimento?",
-    "Quantos planetas fazem parte do Sistema Solar?",
-    "Quem foi Albert Einstein?"
+    "How do you usually study for a test?",
+    "What helps you remember information better?",
+    "Do you prefer studying alone or with others? Why?",
+    "How does listening help you learn a subject?",
+    "Do you like using flashcards? Why?",
+    "How does writing notes help you learn?",
+    "Which is better for you: reading or watching videos?",
+    "Do you use mind maps or summaries?",
+    "How often do you review what you study?",
+    "What time of day do you learn best?",
+    "Do you test yourself after studying? How?",
+    "What do you do when you don't understand something?",
+    "Do you learn better by doing exercises or reading theory?",
+    "Are you a visual, auditory, or kinesthetic learner?",
+    "Do you remember things better when you draw them?",
+    "How do you feel about group study? Does it help you?",
+    "What tools do you use to stay focused while studying?",
+    "How do breaks help you study better?"
   ]);
+
   const hoverTimeoutRef = useRef(null); // Referência para controlar o tempo de hover
 
   /* ================================
@@ -53,7 +52,7 @@ export default function App() {
   };
 
   const editPlayer = (playerName) => {
-    const newName = prompt("Editar nome do jogador:", playerName);
+    const newName = prompt("Edit Player Name:", playerName);
     if (newName && newName.trim() !== "") {
       setPlayers((prev) =>
         prev.map((p) =>
@@ -70,7 +69,7 @@ export default function App() {
     const saveQuestions = questions;
     saveQuestions.splice(randomNumber, 1);
     setQuestions(saveQuestions)
-    
+
     return question;
   }
 
@@ -151,7 +150,7 @@ export default function App() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        🧙‍♂️ Jogo de Perguntas
+        🧙‍♂️ Discussion Game
       </motion.h1>
 
       {/* ================================
@@ -168,10 +167,10 @@ export default function App() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => {
-      if (e.key === "Enter") addPlayer(); // ✅ Pressionar Enter adiciona jogador
-    }}
+            if (e.key === "Enter") addPlayer(); // ✅ Pressionar Enter adiciona jogador
+          }}
           className="w-64 p-2 rounded-md border-2 border-purple-500 bg-purple-950 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          placeholder="Nome do jogador"
+          placeholder="Player name"
         />
         <motion.button
           whileTap={{ scale: 0.95 }}
@@ -179,7 +178,7 @@ export default function App() {
           onClick={addPlayer}
           className="px-4 py-2 rounded-md bg-yellow-400 text-purple-900 font-semibold shadow-md"
         >
-          Adicionar jogador
+          Add Player
         </motion.button>
       </motion.div>
 
@@ -215,18 +214,18 @@ export default function App() {
                     scale: isSelected ? 1.1 : isHighlighted ? 1.06 : 1,
                     boxShadow: isSelected
                       ? [
-                          "0 0 10px rgba(250,204,21,0.85)",
-                          "0 0 25px rgba(250,204,21,0.65)",
-                          "0 0 10px rgba(250,204,21,0.85)",
-                        ]
+                        "0 0 10px rgba(250,204,21,0.85)",
+                        "0 0 25px rgba(250,204,21,0.65)",
+                        "0 0 10px rgba(250,204,21,0.85)",
+                      ]
                       : "0 0 0 rgba(0,0,0,0)",
                     backgroundColor: isHovered
                       ? "#6d28d9" // roxo intenso no hover
                       : isSelected
-                      ? "#facc15"
-                      : isHighlighted
-                      ? "#facc15"
-                      : "#4c1d95",
+                        ? "#facc15"
+                        : isHighlighted
+                          ? "#facc15"
+                          : "#4c1d95",
                     color: isHovered ? "#fff" : isSelected ? "#1e0033" : "#ffffff",
                   }}
                   transition={{
@@ -298,13 +297,12 @@ export default function App() {
         whileTap={{ scale: 0.9 }}
         onClick={startSelection}
         disabled={isSelecting}
-        className={`px-6 py-2 rounded-full font-semibold text-lg transition ${
-          isSelecting
+        className={`px-6 py-2 rounded-full font-semibold text-lg transition ${isSelecting
             ? "bg-purple-500 text-white cursor-not-allowed opacity-70"
             : "bg-yellow-400 text-purple-900 hover:bg-yellow-300 shadow-md shadow-yellow-400/30"
-        }`}
+          }`}
       >
-        Sortear jogador 🎲
+        Choice Player 🎲
       </motion.button>
 
       {/* ================================
@@ -321,7 +319,7 @@ export default function App() {
             className="mt-10 bg-purple-950/60 border-4 border-yellow-400 rounded-2xl shadow-lg shadow-yellow-400/30 p-6 text-center max-w-lg"
           >
             <h2 className="text-2xl font-bold mb-2 text-yellow-300">
-              Pergunta:
+              Ask:
             </h2>
             <p className="text-lg text-white/90">
               {
